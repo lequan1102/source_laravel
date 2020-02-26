@@ -153,6 +153,21 @@ class ProductsController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $id = (int)$id;
+        $result = Products::find($id);
+
+        if (is_numeric($id) && $result){
+            $result_translations = PostsTranslation::where('posts_id',$id);
+            
+            if ($result->delete() && $result_translations->delete()){
+                \DB::commit();
+                return redirect()->back()->with('success','Xóa thành công.');
+            } else {
+                \DB::rollBack();
+                return redirect()->back()->with('error','Xóa thất bại.');
+            }
+        } else {
+            return redirect()->back()->with('error','Không tìm thấy bài viết cần xóa.');
+        }
     }
 }
