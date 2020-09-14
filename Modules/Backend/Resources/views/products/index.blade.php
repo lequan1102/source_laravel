@@ -3,18 +3,18 @@
 @section('layout')
     <div class="tab-content">
         <div class="container-fluid tab-pane active" id="vi">
-            <form action="" method="POST">
+            <form action="{{ route('number.products') }}" method="GET">
                 <div class="panel">
                     <div class="panel-title">
                         @if(count($products) > 0)
                         <div class="show_items">
                             hiển thị
-                            <select name="number" id="show_page_number">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="80">80</option>
+                            <select name="number" onchange="this.form.submit()">
+                                <option value="10"<?php if(session('number_products') == 10) echo 'selected' ?>>10</option>
+                                <option value="20"<?php if(session('number_products') == 20) echo 'selected' ?>>20</option>
+                                <option value="30"<?php if(session('number_products') == 30) echo 'selected' ?>>30</option>
+                                <option value="50"<?php if(session('number_products') == 50) echo 'selected' ?>>50</option>
+                                <option value="100"<?php if(session('number_products') == 100) echo 'selected' ?>>100</option>
                             </select>
                         </div>
                         <table id="example" style="width:100%">
@@ -31,7 +31,7 @@
                                     <th>Tiêu đề</th>
                                     <th class="text-center">Chuyên mục</th>
                                     <th>Mã giảm giá</th>
-                                    <th>Ngày bán</th>
+                                    <th>Ngày mở bán</th>
                                     <th class="text-center">Trạng thái</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -65,37 +65,55 @@
                                       </div>
                                     </td>
                                     <td class="text-center">
-                                      Đầm
-                                    </td>
-                                    <td>#9021382904</td>
-                                    <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($item->created_at))->diffForHumans() }}</td>
-                                    <td class="text-center">
-                                        <span class="badge badge-success">hiển thị</span>
-                                        <span class="badge badge-danger">ẩn</span>
+                                        @if ($item->category->name == '')
+                                            Uncategory
+                                            @else
+                                            {{ $item->category->name }}
+                                        @endif
                                     </td>
                                     <td>
+                                        @if ($item->code == '')
+                                            null
+                                            @else
+                                            {{ $item->code }}
+                                        @endif
+                                    </td>
+                                    <td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($item->created_at))->diffForHumans() }}</td>
+                                    <td class="text-center">
+                                        @if ($item->status == 1)
+                                            <span class="badge badge-success">hiển thị</span>
+                                            @else
+                                            <span class="badge badge-danger">ẩn</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <!--Action-->
                                         <div class="dropdown">
-                                            <button class="btn dropdowntable" type="button" id="dropdownMenuButton2"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button class="btn dropdowntable" type="button" id="dropdownMenuButton{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <svg viewBox="0 0 512 512"><path fill="currentColor" d="M304 256c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm120-48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-336 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"></path></svg>
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2" x-placement="bottom-start" style="position: absolute; transform: translate3d(-2px, 13px, 0px); top: 0px; left: 0px; will-change: transform;">sửa</a>
-                                                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#del"><i class="bx bxs-trash mr-2"></i> Thùng rác</a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $item->id }}"
+                                                    x-placement="bottom-start" style="position: absolute; transform: translate3d(-2px, 13px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                <a class="dropdown-item" href="{{ route('edit.products',['id'=>$item->id]) }}"><i class="bx bxs-pencil mr-2"></i> Chỉnh sửa</a>
+                                                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#del{{ $item->id }}"><i class="bx bxs-trash mr-2"></i>Xoá</a>
                                             </div>
                                         </div>
                                         <!-- Modal Confirm Deletel -->
-                                        <div class="modal fade" id="del" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="del{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: none">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Di chuyển bài viết này tới thùng rác?</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">@lang('backend::seeders.data_label.are_you_sure_ac_delete')</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
                                                     </div>
-                                                    <div class="modal-body"></div>
-                                                    <div class="modal-footer" style="border-top: none">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                        <a href="product/action"><button type="button" class="btn btn-danger">Có, chắc chắn</button></a>
+                                                    <div class="modal-body" style="text-align: left">
+                                                        @lang('backend::seeders.data_label.name') <code>{{ $item->name }}</code>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('backend::seeders.data_label.no')</button>
+                                                        <a href="{{ route('destroy.products', ['id' => $item->id]) }}"><button type="button" class="btn btn-primary">@lang('backend::seeders.data_label.delete_confirm')</button></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +148,7 @@
                         <option value="public">Hiển thị</option>
                         <option value="delete">Xóa vĩnh viễn</option>
                     </select>
-                    <button type="submit" formaction="" class="btn btn-secondary">Thực hiện</button>
+                    <button type="submit" formaction="" class="btn btn-secondary">@lang('backend::seeders.data_label.perform')</button>
                 </div>
                 @endif
             </form>
@@ -138,27 +156,7 @@
     </div>
 @endsection
 @section('footer')
-    <script>
-        $(document).ready(function(){
-            $('#show_page_number').on('change', function() {
-                var number = $(this).val();
-                $.ajax({
-                    url: '/posts',
-                    type: 'POST',
-                    data: {number : number},
-                })
-                .done(function(data) {
-                    console.log(number);
-                    // location.reload();
-                    // $('#example').html(data);
-                    // location.reload();
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-            });
-        });
-    </script>
+
 @endsection
 @section('breadcrumbs')
     {{ Breadcrumbs::render('products') }}

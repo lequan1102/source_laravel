@@ -60,11 +60,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($item->category_id)
+                                                {{-- @if ($item->category_id)
                                                     {{ $item->category->name }}
                                                     @else
                                                     <span class="badge badge-danger">-</span>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                             <td>
                                                 @if ($item->status == 1)
@@ -144,7 +144,6 @@
                             </select>
                             <button type="submit" formaction="" class="btn btn-secondary">@lang('backend::seeders.data_label.perform')</button>
                         </div>
-                        
                     </form>
                 </div>
                 <div class="container-fluid tab-pane" id="en">

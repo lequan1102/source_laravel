@@ -5,13 +5,13 @@
         @csrf
         <div class="container-fluid" id="frontend-admin">
             <div class="row">
-                <div class="col col-md-8 col-12">
+                <div class="col col-md-4 col-12">
                     <div class="admin-head">
-                        <div class="box-thumbnail bg-admin">
+                        <div class="box-thumbnail bg-admin" style="padding-top: 40%">
                             <div class="thumbnail-lazy">
                                 <input type="text" value="{{ $edit->background }}" id="background-admin" name="background" class="form-control-file dropify" data-allowed-file-extensions="pdf jpg jpeg png" 
                                 @if ($edit->background != null)
-                                    data-default-file="{{ $edit->background }}"
+                                    data-default-file="{{ asset($edit->background) }}"
                                     @else
                                     data-default-file="{{ asset('public/backend/img/admin.jpg') }}"
                                 @endif>
@@ -21,7 +21,7 @@
                             <div class="avatar">
                                 <input type="text" value="{{ $edit->avatar }}" id="avatar-admin" name="avatar" class="form-control-file dropify" data-allowed-file-extensions="pdf jpg jpeg png" data-show-remove="false" 
                                 @if ($edit->background != null)
-                                data-default-file="{{ $edit->avatar }}"
+                                data-default-file="{{ asset( $edit->avatar) }}"
                                 @else
                                 data-default-file="{{ asset('public/backend/img/avatar.jpg') }}"
                             @endif>
@@ -62,8 +62,9 @@
                                 <div class="form-group col-lg-6 col-12">
                                     <label for="role">Vai trò</label>
                                     <select id="role" name="roles[]" class="form-control @error('role') is-invalid @enderror" multiple>
-                                        @foreach ($roles as $item)
-                                            <option value="{{ $item->id }}">{{ $item->display_name }}</option>
+                                        @foreach ($roles as $role)
+                                            
+                                            <option value="{{ $role->id }}" {{$lsRoleofAdmin->contains($role->id) ? 'selected' : ''}}>{{ $role->display_name }}</option>
                                         @endforeach
                                     </select>   
                                     {{-- @if ($item->) selected @endif --}}
@@ -105,7 +106,7 @@
 </script>
 <script>
     //Select 2
-    $('#role').select2();
+    // $('#role').select2();
     //xử lý riêng cho 2 phần background và avatar
     /*CKFINDER 3   Background admin*/
     var upload_bg_admin = document.getElementById( 'background-admin' );

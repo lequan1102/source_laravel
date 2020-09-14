@@ -51,7 +51,7 @@
                                             @if ($item->avatar == null)
                                                 <img src="{{ asset('public/backend/img/2.jpg') }}">
                                                 @else
-                                                <img src="{{ $item->avatar }}">
+                                                <img src="{{ asset($item->avatar) }}">
                                             @endif
                                             <div class="block">
                                                 <a href="{{ route('edit.admin',['id'=>$item->id]) }}">{{ $item->name }}</a>

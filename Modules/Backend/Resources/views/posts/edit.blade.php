@@ -227,16 +227,7 @@
 
 @section('footer')
 <script>
-    CKEDITOR.replace( 'editor', {
-        extraPlugins: 'easyimage',
-        extraPlugins: 'cloudservices',
-        filebrowserBrowseUrl: '{{ asset('public/backend/ckfinder/ckfinder.html') }}',
-        filebrowserImageBrowseUrl: '{{ asset('public/backend/ckfinder/ckfinder.html?type=Images') }}',
-        filebrowserFlashBrowseUrl: '{{ asset('public/backend/ckfinder/ckfinder.html?type=Flash') }}',
-        filebrowserUploadUrl: '{{ asset('public/backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-        filebrowserImageUploadUrl: '{{ asset('public/backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-        filebrowserFlashUploadUrl: '{{ asset('public/backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-    } );
+    CKEDITOR.replace( 'editor');
     $('.dropify').dropify({
         messages: {
             'default': 'Kéo thả tập tin ở đây hoặc nhấn chuột',

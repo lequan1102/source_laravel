@@ -19,6 +19,7 @@ class CreatePostsTranslationsTable extends Migration
                 $table->integer('posts_id')->unsigned();
                 $table->string('locale')->index();
                 $table->string('title');
+                $table->string('slug');
                 $table->longText('body');
                 $table->string('excerpt')->nullable();
                 $table->string('seo_title')->nullable();

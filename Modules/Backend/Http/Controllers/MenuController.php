@@ -8,134 +8,85 @@ use Illuminate\Routing\Controller;
 
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Support\Facades\Input;
-use Modules\Backend\Entities\Menu;
+use Modules\Backend\Entities\MenuItems;
+use Modules\Backend\Entities\Menus;
 class MenuController extends BaseController
 {
     public function __construct(){
         parent::__construct();
         $data['menus'] = 'menus';
     }
-    
-    public function change(Request $request)
-    {
-        if($request->ajax()){
-            $data = '';
-            $data = json_decode($request->input('reponse'), true);
-
-            $dd = array(
-                'title'    => 'sdsd',
-                'response' => $data
-            );
-    
-            Menu::create($dd);
-
-            // Nếu có menu
-            // if ($data){
-            //     $html = '<div class="dd"><ol class="dd-list">';
-
-            //     foreach ($data as $item) {
-            //         $html .= '<li class="dd-item" data-title="'.$item['title'].'" data-id="'.$item['id'].'">';
-            //         $html .= '<div class="dd-handle">'.$item['title'].'</div>';
-            //         // Nếu có mục con
-            //         if (isset($item['children'])){
-                        
-            //             foreach ($item['children'] as $subArray) {
-            //                 $html .= '<ol class="dd-list">';
-            //                 $html .= '<li class="dd-item" data-titlte="'.$item['title'].'" data-id="'.$subArray['id'].'">';
-            //                 $html .= '<div class="dd-handle">'.$item['title'].'</div>';
-            //                 $html .= '</li>';
-            //                 $html .= '</ol>';
-            //             }
-            //         }
-            //         $html .= '</li>';
-            //     }
-            //     $html .= '</ol></div>';
-            // } else {
-            //     print_r('Không có dữ liệu');
-            // }
-        }
-       
-        
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
-        foreach ($data as $key => $item) {
-            echo $item['id'] . '<br>';
-            echo $item['title'] . '<br>';
-        }
-        
-    }
     /**
-     * Hiển thị thực đơn
+     * Hiển thị các Menus
      */
     public function index()
     {
-        $data['change'] = '';
-        $data['settings'] = 'menu';
+        $data['menu'] = Menus::all();
 
-        $data['menu'] = Menu::all();
-
-
-        return view('backend::menu.index', compact('menu'));
+        return view('backend::menu.list_menu', $data);
     }
-
     /**
-     * Show the form for creating a new resource.
-     * @return Response
+     * Hiển thị các mục con của Menus được chọn
      */
+     public function menu_items($id)
+     {
+         $menu = MenuItems::find($id);
+         if ($menu) {
+           $data['menu'] = MenuItems::all();
+           $data['json'] = json_encode(MenuItems::all());
+           return view('backend::menu.index',$data);
+         }
+         return redirect()->back()->with('error', 'ko co menu');
+     }
+     public function sortMenu(Request $request){
+
+        $data = json_decode($request->reponse,true);
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';die;
+        $i=0;
+
+        foreach($data as $row){
+            $i++;
+            // $menu = MenuItems::find($row['id']);
+            echo '<pre>';
+            // print_r($row['id']);
+            print_r($row);
+            print_r($row['parent_id']);
+            echo '</pre>';
+            // $menu->parent_id = $row['parent_id'];
+            // $menu = MenuItems::save($row['id']);
+        }
+    }
     public function create()
     {
         return view('backend::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    function store(Request $request)
     {
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
     public function show($id)
     {
         return view('backend::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
     public function edit($id)
     {
         return view('backend::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
+
     public function update(Request $request, $id)
     {
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
+
     public function destroy($id)
     {
-        //
+
     }
 }

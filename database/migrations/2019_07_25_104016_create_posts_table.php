@@ -13,6 +13,7 @@ class CreatePostsTable extends Migration
 				Schema::create('posts', function (Blueprint $table) {
 					$table->bigIncrements('id');
 					$table->string('image')->nullable();
+					$table->int('category_id')->nullable();
 					$table->foreign('category_id')->references('id')->on('category');
 					$table->tinyInteger('author_id')->nullable();
 					$table->string('thumbnails',1000)->nullable();

@@ -8,6 +8,7 @@ return [
     ],
     'data_rows'  => [
         'author'           => 'Tác giả',
+        'member'           => 'Thành viên',
         'avatar'           => 'Ảnh đại diện',
         'body'             => 'Cơ thể',
         'category'         => 'Danh mục',

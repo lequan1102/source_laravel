@@ -1,8 +1,14 @@
 <?php
 
 return [
+    'roles'   => [
+        'admin'             => 'Admin',
+        'user'              => 'User',
+        'editor'            => 'Editor',
+    ],
     'data_rows'  => [
         'author'           => 'Author',
+        'member'           => 'Member',
         'avatar'           => 'Avatar',
         'body'             => 'Body',
         'category'         => 'Category',

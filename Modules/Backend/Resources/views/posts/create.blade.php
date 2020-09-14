@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
         <div class="container-fluid tab-pane" id="en">
             <div class="container-fluid">
                 <div class="row">
@@ -174,6 +174,9 @@
                                     <label for="category">Bài viết thuộc chuyên mục</label>
                                     <select name="category_id" id="category" class="form-control">
                                         <option value="">Chọn chuyên mục</option>
+                                        @foreach ($list_category as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -222,33 +225,14 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
     </div>
 </form>
 @endsection
 
 @section('footer')
 <script>
-    CKEDITOR.replace( 'editor', {
-        extraPlugins: 'easyimage',
-        extraPlugins: 'cloudservices',
-        filebrowserBrowseUrl: '/public/templates/ckfinder/ckfinder.html',
-        filebrowserImageBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Images',
-        filebrowserFlashBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Flash',
-        filebrowserUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-        filebrowserImageUploadUrl: '/uploads/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-        filebrowserFlashUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-    } );
-    CKEDITOR.replace( 'editor2', {
-        extraPlugins: 'easyimage',
-        extraPlugins: 'cloudservices',
-        filebrowserBrowseUrl: '/public/templates/ckfinder/ckfinder.html',
-        filebrowserImageBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Images',
-        filebrowserFlashBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Flash',
-        filebrowserUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-        filebrowserImageUploadUrl: '/uploads/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-        filebrowserFlashUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-    } );
+    CKEDITOR.replace( 'editor');
     $('.dropify').dropify({
         messages: {
             'default': 'Kéo thả tập tin ở đây hoặc nhấn chuột',

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App, DateTime;
 use Modules\Backend\Entities\Products;
+use Modules\Backend\Entities\Category;
 class ProductsController extends BaseController
 {
     static $products;
@@ -19,10 +20,20 @@ class ProductsController extends BaseController
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['products'] = Products::paginate(12);
-        return view('backend::products.index', $data);
+      //Hiển thị số sản phẩm của 1 trang
+      $number = 10;
+      if ($request->number){
+        $number = session()->put('number_products', $request->number);
+        $number = session('number_products');
+      }
+      if (session()->has('number_products')) {
+        $number = session('number_products');
+      }
+      $data['products'] = Products::orderBy('id', 'DESC')->paginate($number);
+      return view('backend::products.index', $data);
+
     }
 
     /**
@@ -31,7 +42,8 @@ class ProductsController extends BaseController
      */
     public function create()
     {
-        return view('backend::products.create');
+        $data['category'] = Category::all();
+        return view('backend::products.create',$data);
     }
 
     /**
@@ -44,24 +56,13 @@ class ProductsController extends BaseController
         if ($request->isMethod('post')) {
             \DB::beginTransaction();
             $data = array(
-                'vi' => [
-                    'name'              => $request->input('vi_name'),
-                    'slug'              => str_slug($request->vi_name,'-'),
-                    'body'              => $request->input('vi_body'),
-                    'excerpt'           => $request->input('vi_excerpt'),
-                    'seo_title'         => $request->input('vi_seo_title') != '' ? $request->input('vi_seo_title') : $request->input('vi_name'),
-                    'meta_keywords'     => $request->input('vi_meta_keywords'),
-                    'meta_description'  => $request->input('vi_meta_description')
-                ],
-                'en' => [
-                    'name'              => $request->input('en_name'),
-                    'slug'              => str_slug($request->en_name,'-'),
-                    'body'              => $request->input('en_body'),
-                    'excerpt'           => $request->input('en_excerpt'),
-                    'seo_title'         => $request->input('en_seo_title') != '' ? $request->input('en_seo_title') : $request->input('en_name'),
-                    'meta_keywords'     => $request->input('en_meta_keywords'),
-                    'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
-                ],
+                'name'              => $request->input('name'),
+                'slug'              => str_slug($request->name,'-'),
+                'body'              => $request->input('body'),
+                'excerpt'           => $request->input('excerpt'),
+                'seo_title'         => $request->input('seo_title') != '' ? $request->input('seo_title') : $request->input('name'),
+                'meta_keywords'     => $request->input('meta_keywords'),
+                'meta_description'  => $request->input('meta_description'),
                 'thumbnail'         => $request->input('thumbnail'),
                 'category_id'       => $request->input('category_id'),
                 'author_id'         => Auth::user()->id,
@@ -157,9 +158,9 @@ class ProductsController extends BaseController
         $result = Products::find($id);
 
         if (is_numeric($id) && $result){
-            $result_translations = PostsTranslation::where('posts_id',$id);
-            
-            if ($result->delete() && $result_translations->delete()){
+            // $result_translations = PostsTranslation::where('posts_id',$id);
+            // if ($result->delete() && $result_translations->delete()){
+            if ($result->delete()){
                 \DB::commit();
                 return redirect()->back()->with('success','Xóa thành công.');
             } else {
@@ -167,7 +168,7 @@ class ProductsController extends BaseController
                 return redirect()->back()->with('error','Xóa thất bại.');
             }
         } else {
-            return redirect()->back()->with('error','Không tìm thấy bài viết cần xóa.');
+            return redirect()->back()->with('error','Không tìm thấy sản phẩm cần xóa.');
         }
     }
 }

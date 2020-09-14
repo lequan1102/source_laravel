@@ -22,7 +22,7 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        $data['category'] = Category::all();
+        $data['category'] = Category::orderBy('id','DESC')->get();
         return view('backend::category.index', $data);
     }
 
@@ -45,22 +45,28 @@ class CategoryController extends BaseController
         if ($request->isMethod('post')) {
             \DB::beginTransaction();
             $data = array(
-                'vi' => [
-                    'name'              => $request->input('vi_name'),
-                    'slug'              => str_slug($request->vi_name,'-'),
-                    'excerpt'           => $request->input('en_excerpt'),
-                    'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
-                    'meta_keywords'     => $request->input('en_meta_keywords'),
-                    'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
-                ],
-                'en' => [
-                    'name'              => $request->input('en_name'),
-                    'slug'              => str_slug($request->en_name,'-'),
-                    'excerpt'           => $request->input('en_excerpt'),
-                    'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
-                    'meta_keywords'     => $request->input('en_meta_keywords'),
-                    'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
-                ],
+                // 'vi' => [
+                //     'name'              => $request->input('vi_name'),
+                //     'slug'              => str_slug($request->vi_name,'-'),
+                //     'excerpt'           => $request->input('en_excerpt'),
+                //     'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
+                //     'meta_keywords'     => $request->input('en_meta_keywords'),
+                //     'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
+                // ],
+                // 'en' => [
+                //     'name'              => $request->input('en_name'),
+                //     'slug'              => str_slug($request->en_name,'-'),
+                //     'excerpt'           => $request->input('en_excerpt'),
+                //     'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
+                //     'meta_keywords'     => $request->input('en_meta_keywords'),
+                //     'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
+                // ],
+                'name'                  => $request->input('name'),
+                'slug'                  => str_slug($request->name,'-'),
+                'excerpt'               => $request->input('excerpt'),
+                'seo_title'             => $request->input('seo_name') != '' ? $request->input('seo_name') : $request->input('name'),
+                'meta_keywords'         => $request->input('meta_keywords'),
+                'meta_description'      => $request->input('meta_description') != '' ? $request->input('meta_description') : $request->input('excerpt'),
                 'icon'                  => $request->input('icon'),
                 'thumbnail'             => $request->input('thumbnail'),
                 'author_id'             => Auth::user()->id,
@@ -111,22 +117,30 @@ class CategoryController extends BaseController
 
         if (is_numeric($id) && $result){
             $data = array(
-                'vi' => [
-                    'name'              => $request->input('vi_name'),
-                    'slug'              => str_slug($request->vi_name,'-'),
-                    'excerpt'           => $request->input('en_excerpt'),
-                    'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
-                    'meta_keywords'     => $request->input('en_meta_keywords'),
-                    'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
-                ],
-                'en' => [
-                    'name'              => $request->input('en_name'),
-                    'slug'              => str_slug($request->en_name,'-'),
-                    'excerpt'           => $request->input('en_excerpt'),
-                    'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
-                    'meta_keywords'     => $request->input('en_meta_keywords'),
-                    'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
-                ],
+                // 'vi' => [
+                //     'name'              => $request->input('vi_name'),
+                //     'slug'              => str_slug($request->vi_name,'-'),
+                //     'excerpt'           => $request->input('en_excerpt'),
+                //     'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
+                //     'meta_keywords'     => $request->input('en_meta_keywords'),
+                //     'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
+                // ],
+                // 'en' => [
+                //     'name'              => $request->input('en_name'),
+                //     'slug'              => str_slug($request->en_name,'-'),
+                //     'excerpt'           => $request->input('en_excerpt'),
+                //     'seo_title'         => $request->input('en_seo_name') != '' ? $request->input('en_seo_name') : $request->input('en_name'),
+                //     'meta_keywords'     => $request->input('en_meta_keywords'),
+                //     'meta_description'  => $request->input('en_meta_description') != '' ? $request->input('en_meta_description') : $request->input('en_excerpt')
+                // ],
+                'name'                  => $request->input('name'),
+                'slug'                  => str_slug($request->name,'-'),
+                'excerpt'               => $request->input('excerpt'),
+
+                'seo_title'             => $request->input('seo_title') != '' ? $request->input('seo_title') : $request->input('name'),
+                'meta_keywords'         => $request->input('meta_keywords'),
+                'meta_description'      => $request->input('meta_description') != '' ? $request->input('meta_description') : $request->input('excerpt'),
+
                 'icon'                  => $request->input('icon'),
                 'thumbnail'             => $request->input('thumbnail'),
                 'author_id'             => Auth::user()->id,
@@ -134,7 +148,7 @@ class CategoryController extends BaseController
             );
             if ($result->update($data)){
                 \DB::commit();
-                return redirect()->back()->with('success','Cập nhật thành công.');
+                return redirect()->route('index.category')->with('success','Cập nhật thành công.');
             } else {
                 \DB::rollBack();
                 return redirect()->back()->with('error','Cập nhật thất bại.');
@@ -152,5 +166,21 @@ class CategoryController extends BaseController
     public function destroy($id)
     {
         //
+        $id = (int)$id;
+        $result = Category::find($id);
+
+        if (is_numeric($id) && $result){
+            $result_translations = CategoryTranslation::where('category_id',$id);
+            
+            if ($result->delete() && $result_translations->delete()){
+                \DB::commit();
+                return redirect()->back()->with('success','Xóa thành công.');
+            } else {
+                \DB::rollBack();
+                return redirect()->back()->with('error','Xóa thất bại.');
+            }
+        } else {
+            return redirect()->back()->with('error','Không tìm thấy chuyen muc cần xóa.');
+        }
     }
 }

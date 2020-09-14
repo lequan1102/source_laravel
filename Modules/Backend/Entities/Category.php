@@ -4,17 +4,17 @@ namespace Modules\Backend\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 // Sử dụng Translatable
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
+// use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+// use Astrotomic\Translatable\Translatable;
 class Category extends Model
 {
     //Sử dụng Translatable
-    use Translatable;
+    // use Translatable;
     //Khai báo các trường được dịch
-    public $translatedAttributes = ['name', 'slug', 'body', 'excerpt', 'meta_description', 'meta_keywords' ,'seo_title'];
+    // public $translatedAttributes = ['name', 'slug', 'body', 'excerpt', 'meta_description', 'meta_keywords' ,'seo_title'];
 
     protected $table = 'category';
-    protected $fillable = ['name', 'body', 'slug', 'category_id', 'excerpt', 'meta_description', 'meta_keywords', 'seo_name', 'author_id'];
+    protected $fillable = ['name', 'body', 'slug', 'category_id', 'excerpt', 'thumbnail', 'meta_description', 'meta_keywords', 'seo_title', 'author_id'];
 
     /**
      * Relationships [category_id] Posts -> [id] Category

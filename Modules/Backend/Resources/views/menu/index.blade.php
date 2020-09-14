@@ -1,7 +1,6 @@
 @extends('backend::master')
 
 @section('head')
-  <link rel="stylesheet" href="{{ asset('/public/backend/libs/nestable2/jquery.nestable.min.css') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
@@ -18,137 +17,13 @@
           <p class="panel-title" style="color:#777">Kéo và thả menu Mục bên dưới để sắp xếp lại chúng. Hoặc thêm mới tại đây</p>
         </div>
         <div class="panel-title">
-          <div class="dd">
-            <ol class="dd-list">
-                <li class="dd-item" data-title="Bảng điều khiển" data-id="1">
-                    <div class="pull-right item_actions">
-                        <div class="btn btn-sm btn-danger pull-right delete" data-id="0">
-                            <i class="voyager-trash"></i> Xóa
-                        </div>
-                        <div class="btn btn-sm btn-primary pull-right edit" data-id="0" data-title="Tin game" data-url="Tin-Game" data-target="_self" data-icon_class="" data-color="#000000" data-route="" data-parameters="null">
-                            <i class="voyager-edit"></i> Chỉnh sửa
-                        </div>
-                    </div>
-                    <div class="dd-handle">Bảng điều khiển</div>
-                </li>
-                <li class="dd-item" data-title="Bài viết" data-id="2">
-                      <div class="pull-right item_actions">
-                        <div class="btn btn-sm btn-danger pull-right delete" data-id="0">
-                            <i class="voyager-trash"></i> Xóa
-                        </div>
-                        <div class="btn btn-sm btn-primary pull-right edit" data-id="0" data-title="Tin game" data-url="Tin-Game" data-target="_self" data-icon_class="" data-color="#000000" data-route="" data-parameters="null">
-                            <i class="voyager-edit"></i> Chỉnh sửa
-                        </div>
-                    </div>
-                    <div class="dd-handle">Bài viết</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-title="Tin tức" data-id="3">
-                              <div class="pull-right item_actions">
-                                <div class="btn btn-sm btn-danger pull-right delete" data-id="0">
-                                    <i class="voyager-trash"></i> Xóa
-                                </div>
-                                <div class="btn btn-sm btn-primary pull-right edit" data-id="0" data-title="Tin game" data-url="Tin-Game" data-target="_self" data-icon_class="" data-color="#000000" data-route="" data-parameters="null">
-                                    <i class="voyager-edit"></i> Chỉnh sửa
-                                </div>
-                            </div>
-                            <div class="dd-handle">Tin tức</div>
-                        </li>
-                        <li class="dd-item" data-title="Dự án" data-id="4">
-                            <div class="pull-right item_actions">
-                                <div class="btn btn-sm btn-danger pull-right delete" data-id="0">
-                                    <i class="voyager-trash"></i> Xóa
-                                </div>
-                                <div class="btn btn-sm btn-primary pull-right edit" data-id="0" data-title="Tin game" data-url="Tin-Game" data-target="_self" data-icon_class="" data-color="#000000" data-route="" data-parameters="null">
-                                    <i class="voyager-edit"></i> Chỉnh sửa
-                                </div>
-                            </div>
-                            <div class="dd-handle">Dự án</div>
-                        </li>
-                        <li class="dd-item" data-title="Tuyển dụng" data-id="5">
-                            <div class="pull-right item_actions">
-                                <div class="btn btn-sm btn-danger pull-right delete" data-id="0">
-                                    <i class="voyager-trash"></i> Xóa
-                                </div>
-                                <div class="btn btn-sm btn-primary pull-right edit" data-id="0" data-title="Tin game" data-url="Tin-Game" data-target="_self" data-icon_class="" data-color="#000000" data-route="" data-parameters="null">
-                                    <i class="voyager-edit"></i> Chỉnh sửa
-                                </div>
-                            </div>
-                            <div class="dd-handle">Tuyển dụng</div>
-                        </li>
-                    </ol>
-                </li>
-                {{-- <li class="dd-item" data-id="6">
-                    <div class="dd-handle">Trang đơn</div>
-                </li>
-                <li class="dd-item" data-id="7">
-                    <div class="dd-handle">Bán hàng</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="8">
-                            <div class="dd-handle">Sản phẩm</div>
-                        </li>
-                        <li class="dd-item" data-id="9" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Đơn hàng</div>
-                        </li>
-                        <li class="dd-item" data-id="10" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Mã giảm giá</div>
-                        </li>
-                        <li class="dd-item" data-id="11" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Kho hàng</div>
-                        </li>
-                    </ol>
-                </li>
-                <li class="dd-item" data-id="12">
-                    <div class="dd-handle">Chuyên mục</div>
-                </li>
-                <li class="dd-item" data-id="13">
-                    <div class="dd-handle">Liên hệ</div>
-                </li>
-                <li class="dd-item" data-id="14">
-                    <div class="dd-handle">Chỉnh sửa giao diện</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="15">
-                            <div class="dd-handle">Banner</div>
-                        </li>
-                        <li class="dd-item" data-id="16" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Giải pháp</div>
-                        </li>
-                        <li class="dd-item" data-id="17" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Mô hình</div>
-                        </li>
-                        <li class="dd-item" data-id="18" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Cam kết</div>
-                        </li>
-                    </ol>
-                </li>
-                <li class="dd-item" data-id="19">
-                    <div class="dd-handle">Người dùng</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="20">
-                            <div class="dd-handle">Khách hàng</div>
-                        </li>
-                        <li class="dd-item" data-id="21" data-foo="bar" data-ddd="dsdsdds">
-                            <div class="dd-handle">Quản trị</div>
-                        </li>
-                    </ol>
-                </li>
-                <li class="dd-item" data-id="22">
-                  <div class="dd-handle">Cài đặt</div>
-                  <ol class="dd-list">
-                      <li class="dd-item" data-id="23">
-                          <div class="dd-handle">Thực đơn</div>
-                      </li>
-                      <li class="dd-item" data-id="24" data-foo="bar" data-ddd="dsdsdds">
-                          <div class="dd-handle">Quyền</div>
-                      </li>
-                      <li class="dd-item" data-id="25" data-foo="bar" data-ddd="dsdsdds">
-                          <div class="dd-handle">Sidebar</div>
-                      </li>
-                      <li class="dd-item" data-id="26" data-foo="bar" data-ddd="dsdsdds">
-                          <div class="dd-handle">Cấu hình</div>
-                      </li>
-                  </ol>
-                </li> --}}
-            </ol>
+          <div class="dd" id="nestable3">
+              <ol class='dd-list dd3-list'>
+                  <div id="dd-empty-placeholder"></div>
+              </ol>
+          </div>
+          <div id="nestable-json">
+
           </div>
           <div class="ool clear"></div>
         </div>
@@ -167,32 +42,32 @@
             </button>
         </div>
         <div class="modal-body" style="text-align: left">
-            <form>
-                <div class="form-group">
-                    <label for="input1">Tiêu đề</label>
-                    <input type="text" name="title" class="form-control" id="input1" placeholder="Tên mục menu">
-                </div>
-                <div class="form-group">
-                    <label for="input4">Mở ra</label>
-                    <select name="target" class="custom-select" id="input4">
-                        <option value="_self" selected>Cùng một tab / cửa sổ hiện tại</option>
-                        <option value="_blank">Một tab mới / cửa sổ mới</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="input3">Loại liên kết</label>
-                    <input type="text" name="slug" class="form-control" placeholder="URL Tĩnh | Route">
-                </div>
-                <div class="form-group">
-                    <label for="input5">Biểu tượng cho mục menu ( sử dụng<code><a target="_blank" href="https://fontawesome.com/icons">fontawesome</a></code>)</label>
-                    <input type="text" class="form-control" id="input5" placeholder="fab fa-adobe">
-                </div>
-                <div class="form-group">
-                    <label for="input2">Hình ảnh</label>
-                    <input type="file" class="form-control" id="input2" placeholder="">
-                </div>
-                <textarea rows="3" name="des" class="form-control" placeholder="Mô tả ngắn"></textarea>
-            </form>
+          <form action="" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                  <label for="title">Tiêu đề</label>
+                  <input type="text" name="title" class="form-control" id="title" placeholder="Tên mục menu">
+              </div>
+              <div class="form-group">
+                  <label for="target">Mở ra</label>
+                  <select name="target" class="custom-select" id="target">
+                      <option value="_self" selected>Cùng một tab / cửa sổ hiện tại</option>
+                      <option value="_blank">Một tab mới / cửa sổ mới</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="url">Loại liên kết</label>
+                  <input type="text" name="url" class="form-control" id="url" placeholder="URL Tĩnh | Route">
+              </div>
+              <div class="form-group">
+                  <label for="input5">Biểu tượng cho mục menu ( sử dụng<code><a target="_blank" href="https://fontawesome.com/icons">fontawesome</a></code>)</label>
+                  <input type="text" class="form-control" id="input5" placeholder="fab fa-adobe">
+              </div>
+              <div class="form-group">
+                  <label for="image">Hình ảnh</label>
+                  <input type="file" name="image" class="form-control" id="image">
+              </div>
+              <textarea rows="3" name="parameters" class="form-control" placeholder="Thông số"></textarea>
+          </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
@@ -206,10 +81,51 @@
   <script src="{{ asset('/public/backend/libs/nestable2/jquery.nestable.min.js') }}"></script>
   <script>
     $(document).ready(function(){
-      
-        $('.dd').nestable();
+        var obj = '[{"id":1,"title":"Bảng điều khiển"},{"id":2,"title":"Bài viết"},{"id":3,"children":[ {"id":4},{"id":5,"foo":"bar"}] } ]';
+        var output = '';
+        function buildItem(item) {
+
+            var html = "<li class='dd-item' data-id='" + item.id + "'>";
+            html += "<div class='dd-handle'>" + item.title + "</div>";
+
+            if (item.children) {
+                html += "<ol class='dd-list'>";
+                $.each(item.children, function (index, sub) {
+                    html += buildItem(sub);
+                });
+                html += "</ol>";
+
+            }
+
+            html += "</li>";
+
+            return html;
+        }
+
+        $.each(JSON.parse(obj), function (index, item) {
+
+            output += buildItem(item);
+
+        });
+
+        $('#dd-empty-placeholder').html(output);
+        $('#nestable3').nestable();
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+
+        // $('.dd').nestable();
+        $('.dd').nestable({
+            callback: function(l,e){
+              var node_id = $(e).data('id');
+              var node_title = $(e).data('title');
+              console.log(node_id);
+              console.log(node_title);
+            }
+        },'asNestedSet');
         $('.dd').on('change', function() {
-            var data = $('.dd').nestable('serialize');
+            var data = $('.dd').nestable('asNestedSet');
             var datastring = JSON.stringify(data);
             $.ajaxSetup({
                 headers: {
@@ -218,7 +134,7 @@
             });
             $.ajax({
                 type : "POST",
-                url : '{{ route('index.changemenu') }}',
+                url : '{{ route('sort.menu') }}',
                 data: {
                     reponse: datastring,
                 },
@@ -238,40 +154,6 @@
     //       console.log('Item deleted');
     //   });
     });
-    </script>
-    <script>
-        $(document).ready(function(){
-            var obj = $data;
-            var output = '';
-            function buildItem(item) {
-
-                var html = "<li class='dd-item' data-id='" + item.id + "'>";
-                html += "<div class='dd-handle'>" + item.id + "</div>";
-
-                if (item.children) {
-
-                    html += "<ol class='dd-list'>";
-                    $.each(item.children, function (index, sub) {
-                        html += buildItem(sub);
-                    });
-                    html += "</ol>";
-
-                }
-
-                html += "</li>";
-
-                return html;
-            }
-
-            $.each(JSON.parse(obj), function (index, item) {
-
-                output += buildItem(item);
-
-            });
-
-            $('#dd-empty-placeholder').html(output);
-            $('#nestable3').nestable();
-        });
     </script>
 @endsection
 @section('breadcrumbs')

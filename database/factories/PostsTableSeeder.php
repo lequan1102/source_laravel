@@ -13,6 +13,6 @@ $factory->define(Posts::class, function (Faker $faker) {
         'body'              =>  $faker->paragraph,
         'author_id'         =>  factory(Modules\Backend\Entities\Users::class),
         'category_id'       =>  factory(Modules\Backend\Entities\Users::class),
-        'excerpt'           =>  $faker->paragraph,
+        // 'excerpt'           =>  $faker->paragraph,
     ];
 });

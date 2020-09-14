@@ -49,11 +49,21 @@
                                             </div>
                                         </label>
                                     </td>
-                                    <td><a href="{{ route('edit.category',['id' => $item->id]) }}">{{ $item->translate()->name }}</a></td>
+                                    <td><a href="{{ route('edit.category',['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td>
-                                        {{ $item->parent_id }}
+                                        @if ($item->parent_id == null)
+                                            null
+                                            @else
+                                            {{ $item->parent_id }}
+                                        @endif
+                                        
                                     </td>
-                                    <td>{!! $item->translate()->excerpt !!}
+                                    <td>
+                                        @if ($item->excerpt == null)
+                                            null
+                                            @else
+                                            {!! $item->excerpt !!}
+                                        @endif
                                     </td>
                                     <td>
                                         @if ($item->icon != '')
@@ -183,11 +193,11 @@
                                             </div>
                                         </label>
                                     </td>
-                                    <td><a href="{{ route('edit.posts',['id' => $item->id]) }}">{{ $item->translate()->name }}</a></td>
+                                    <td><a href="{{ route('edit.posts',['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td class="text-center">
                                         <span><img style="width: 100px" src="{{ $item->thumbnails }}"></span>
                                     </td>
-                                    <td>{!! $item->translate()->body !!}
+                                    <td>{!! $item->body !!}
                                     </td>
                                     <td>
                                         @if ($item->status == 1)

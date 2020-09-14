@@ -15,12 +15,14 @@ class Settings extends Model
     // public $translatedAttributes = ['title', 'slug', 'body', 'excerpt', 'meta_description', 'meta_keywords' ,'seo_title'];
 
     protected $table = 'settings';
-    // protected $fillable = ['title', 'body', 'slug', 'category_id', 'excerpt', 'meta_description', 'meta_keywords', 'seo_title', 'author_id'];
-
+    protected $fillable = ['key', 'label', 'value', 'element_placeholder', 'type', 'order', 'property', 'group_name'];
+    public $timestamps = true;
     /**
      * Relationships [category_id] Posts -> [id] Category
      * 1. hasOne Category.
      * 2.
      */
-    
+    public function group(){
+        return $this->hasMany('Modules\Backend\Entities\SettingsGroup', 'group_name', 'name');
+    }
 }

@@ -25,16 +25,49 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
      **********************************************/
 
     
-    Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/home', 'PostsController@index')->name('home');
-    Route::get('/posts', 'PostsController@store')->name('posts');
+    
+    Route::namespace('Frontend')->group(function () {
+        Route::get('/', 'IndexController@index')->name('index');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/home', 'PostsController@index')->name('home');
+        Route::get('/posts', 'PostsController@store')->name('posts');
+
+        Route::get('/home', 'HomeController@index')->name('home');
 
 
-
+        
+        Route::group(['prefix' => '{slug}'], function () {
+            //Category_banner
+            Route::get('/c{id}.html', 'CategoryController@index')->name('category.index');
+            //Products
+            Route::get('/p{id}.html', 'ProductsController@index')->name('products.index');
+        });
+    });
+    
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**********************************************
      ******* Đăng nhập vào hệ thống quản lý *******
      **********************************************/

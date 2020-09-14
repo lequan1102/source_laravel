@@ -54,9 +54,9 @@ Breadcrumbs::for('question_show_name', function ($trail, $show) {
     $trail->parent('question');
     $trail->push($show->name, route('edit.question', $show->name));
 });
-// ***************** //
-// *****Products**** //
-// ***************** //
+/*****************/
+/*****Products****/
+/*****************/
 // Bảng điều khiển > Sản phẩm
 Breadcrumbs::for('products', function ($trail) {
     $trail->parent('dashbroad');
@@ -70,9 +70,9 @@ Breadcrumbs::for('create_products', function ($trail) {
     $trail->parent('products');
     $trail->push(__('backend::seeders.data_label.add_new'), route('create.products'));
 });
-// ***************** //
-// *****Category**** //
-// ***************** //
+/*****************/
+/*****Category****/
+/*****************/
 // Bảng điều khiển > Chuyên mục
 Breadcrumbs::for('category', function ($trail) {
     $trail->parent('dashbroad');
@@ -127,7 +127,32 @@ Breadcrumbs::for('menu', function ($trail) {
 });
 
 // Bảng điều khiển > Cài đặt > Menus
-// Bảng điều khiển > Cài đặt > Role
+/*****************/
+/*******Roles*****/
+/*****************/
+// Bảng điều khiển > Roles
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->parent('dashbroad');
+    $trail->push(__('backend::seeders.data_types.role.singular'), route('index.roles'));
+});
+// Bảng điều khiển > Roles > Thêm mới
+Breadcrumbs::for('roles_create', function ($trail) {
+    $trail->parent('roles');
+    $trail->push(__('backend::seeders.data_label.add_new'), route('create.roles'));
+});
+// Bảng điều khiển > Roles > chỉnh sửa
+Breadcrumbs::for('roles_show', function ($trail) {
+    $trail->parent('roles');
+    $trail->push(__('backend::seeders.data_label.edit'), route('index.roles'));
+});
+// Bảng điều khiển > Roles > chỉnh sửa > [id]
+Breadcrumbs::for('roles_edit', function ($trail, $edit) {
+    $trail->parent('roles_show');
+    $trail->push($edit->name, route('edit.roles', $edit->id));
+});
+// ***************** //
+// ****Settings***** //
+// ***************** //
 // Bảng điều khiển > Cài đặt > Settings
 Breadcrumbs::for('settings', function ($trail) {
     $trail->parent('dashbroad');

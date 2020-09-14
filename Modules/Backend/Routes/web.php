@@ -33,7 +33,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
             Route::post('/update','DashbroadController@update')->name('update.dashbroad');
             Route::get('/destroy','DashbroadController@destroy')->name('destroy.dashbroad');
         });
-            /*
+        /*
         * Products Route
         */
         Route::group(['prefix' => 'products'], function(){
@@ -44,6 +44,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
             Route::post('/update/{id}','ProductsController@update')->name('update.products');
             Route::get('/destroy/{id}','ProductsController@destroy')->name('destroy.products');
+
+            Route::get('/number-page','ProductsController@index')->name('number.products');
         });
         /*
         * Category Route
@@ -117,6 +119,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
             Route::post('/update','MenuController@update')->name('update.menu');
             Route::get('/destroy','MenuController@destroy')->name('destroy.menu');
+
+            Route::get('menu-items/{id}','MenuController@menu_items')->name('items.menu');
+
+            Route::post('sort-menu','MenuController@sortMenu')->name('sort.menu');
         });
 
         /*
@@ -130,11 +136,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
             Route::post('/update/{id}','SettingsController@update')->name('update.settings');
             Route::get('/destroy/{id}','SettingsController@destroy')->name('destroy.settings');
+
+            Route::post('/create_field','SettingsController@create_field')->name('create_field.settings');
         });
         /*
         * Role Route
         */
+        Route::group(['prefix' => 'roles'], function(){
+            Route::get('/','RolesController@index')->name('index.roles');
+            Route::get('/create','RolesController@create')->name('create.roles');
+            Route::post('/store','RolesController@store')->name('store.roles');
+            Route::get('/edit/{id}','RolesController@edit')->name('edit.roles');
 
+            Route::post('/update/{id}','RolesController@update')->name('update.roles');
+            Route::get('/destroy/{id}','RolesController@destroy')->name('destroy.roles');
+        });
         /***************************
         ***** Developer Route ******
         ****************************/

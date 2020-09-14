@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "astrotomic/laravel-translatable": "^11.7",
+        "darryldecode/cart": "^4.1",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
@@ -17,6 +18,7 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
+        "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^1.4",
         "nwidart/laravel-modules": "^6.2"
     },

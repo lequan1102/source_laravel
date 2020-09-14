@@ -60,7 +60,7 @@
                                     </td>
                                     <td></td>
                                     <td>
-                                        
+
                                     </td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>
@@ -104,7 +104,7 @@
                             <div class="of-page">
                                 Bạn đang xem trang 1 của 2
                             </div>
-                            
+
                             <div class="paigna">
                                 {{ $users->links('vendor.pagination.backend') }}
                             </div>

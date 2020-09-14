@@ -1,5 +1,6 @@
 @extends('backend::master')
 @section('head')
+<link rel="stylesheet" href="{{ asset('public/backend/libs/select2/select2.min.css') }}">
 <style>
     .dropify-wrapper .dropify-preview .dropify-infos {
         overflow: hidden;
@@ -31,14 +32,15 @@
                     <div class="col-12 panel v2">
                         <!--Tabs Settings content-->
                         <ol class="tabs-js clear">
-                            <li class="tablinks" onclick="openTabsSettings(event, 'basic')"><span>Cơ bản</span></li>
+                            <li class="tablinks active" onclick="openTabsSettings(event, 'basic')"><span>Cơ bản</span></li>
                             <li class="tablinks" onclick="openTabsSettings(event, 'advanced')"><span>Nâng cao</span></li>
-                            <li class="tablinks active" onclick="openTabsSettings(event, 'developers')"><span>Nhà phát triển</span></li>
+                            <li class="tablinks" onclick="openTabsSettings(event, 'developers')"><span>Nhà phát triển</span></li>
+                            <li class="tablinks" onclick="openTabsSettings(event, 'custom')"><span><svg style="width: 12px;float: left;margin-right: 6px;" viewBox="0 0 448 512"><path fill="currentColor" d="M367.31 300.78c-26.29-14.84-47.14-61.41-67.17-97.83C284.41 174.31 254.21 160 224 160s-60.41 14.31-76.15 42.95c-20.29 36.96-40.12 82.56-67.17 97.83C51.63 317.18 32 348.18 32 383.95c0 53.01 42.98 95.98 96 95.98 1.31.04 2.6.07 3.87.07 48.88 0 68.92-32.06 92.13-32.06S267.25 480 316.13 480c1.27 0 2.56-.02 3.87-.07 53.02 0 96-42.97 96-95.98 0-35.77-19.63-66.77-48.69-83.17zm-48.39 147.17l-2.79.05c-20.12 0-33.04-7.72-46.73-15.89-12.71-7.58-27.1-16.17-45.39-16.17s-32.69 8.59-45.39 16.17C164.93 440.28 152 448 131.88 448l-3.87-.07c-35.29 0-64-28.7-64-63.98 0-22.82 12.42-44.02 32.42-55.31 30.46-17.2 50.03-54.48 68.96-90.53 3.52-6.71 7.02-13.37 10.52-19.75C184.97 201.85 202.95 192 224 192s39.03 9.85 48.1 26.36c3.31 6.02 6.64 12.32 10.02 18.71 19.4 36.69 39.46 74.63 69.46 91.57 20 11.29 32.42 32.49 32.42 55.31 0 35.28-28.71 63.98-65.08 64zM112 200c0-30.93-25.07-56-56-56S0 169.07 0 200s25.07 56 56 56 56-25.07 56-56zm-80 0c0-13.23 10.77-24 24-24s24 10.77 24 24-10.77 24-24 24-24-10.77-24-24zm360-56c-30.93 0-56 25.07-56 56s25.07 56 56 56 56-25.07 56-56-25.07-56-56-56zm0 80c-13.23 0-24-10.77-24-24s10.77-24 24-24 24 10.77 24 24-10.77 24-24 24zm-96-80c30.93 0 56-25.07 56-56s-25.07-56-56-56-56 25.07-56 56 25.07 56 56 56zm0-80c13.23 0 24 10.77 24 24s-10.77 24-24 24-24-10.77-24-24 10.77-24 24-24zm-144 80c30.93 0 56-25.07 56-56s-25.07-56-56-56-56 25.07-56 56 25.07 56 56 56zm0-80c13.23 0 24 10.77 24 24s-10.77 24-24 24-24-10.77-24-24 10.77-24 24-24z"></path></svg>Các trường tùy chỉnh</span></li>
                         </ol>
                         <!--Tabs Settings content-->
                         <div class="row">
                             <!--Basic-->
-                            <div class="col col-12 tab-settings" id="basic">
+                            <div class="col col-12 tab-settings" id="basic" style="display: block">
                                 <div class="row">
                                     <div class="col col-sm-12">
                                         <div class="text-center">
@@ -72,16 +74,17 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="email">Email*<code class="ml10">site.email</code></label>
-                                                    <input type="text" id="title" name="email" class="form-control" placeholder="Company@gmail.com" value="quan@vtechcom.org">
+                                                    <label for="location">Địa chỉ*<code class="ml10">site.location</code></label>
+                                                    <input type="text" id="location" name="location" class="form-control" placeholder="Địa chỉ" value="Tầng 36, Khu E6 Đô thị mới Cầu Giấy, Phạm Hùng, Mễ Trì, Nam Từ Liêm, Hà Nội">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="sdt">Địa chỉ*<code class="ml10">site.location</code></label>
-                                                    <input type="text" id="sdt" name="sdt" class="form-control" placeholder="Địa chỉ" value="Tầng 36, Khu E6 Đô thị mới Cầu Giấy, Phạm Hùng, Mễ Trì, Nam Từ Liêm, Hà Nội">
+                                                    <label for="sdt2">Số điện thoại*<code class="ml10">site.tel</code></label>
+                                                    <input type="text" id="sdt2" name="sdt2" class="form-control" placeholder="Company@gmail.com" value="quan@vtechcom.org">
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <!--Social-->
@@ -176,8 +179,8 @@
                                             <h6><svg viewBox="0 0 448 512"><path fill="currentColor" d="M367.31 300.78c-26.29-14.84-47.14-61.41-67.17-97.83C284.41 174.31 254.21 160 224 160s-60.41 14.31-76.15 42.95c-20.29 36.96-40.12 82.56-67.17 97.83C51.63 317.18 32 348.18 32 383.95c0 53.01 42.98 95.98 96 95.98 1.31.04 2.6.07 3.87.07 48.88 0 68.92-32.06 92.13-32.06S267.25 480 316.13 480c1.27 0 2.56-.02 3.87-.07 53.02 0 96-42.97 96-95.98 0-35.77-19.63-66.77-48.69-83.17zm-48.39 147.17l-2.79.05c-20.12 0-33.04-7.72-46.73-15.89-12.71-7.58-27.1-16.17-45.39-16.17s-32.69 8.59-45.39 16.17C164.93 440.28 152 448 131.88 448l-3.87-.07c-35.29 0-64-28.7-64-63.98 0-22.82 12.42-44.02 32.42-55.31 30.46-17.2 50.03-54.48 68.96-90.53 3.52-6.71 7.02-13.37 10.52-19.75C184.97 201.85 202.95 192 224 192s39.03 9.85 48.1 26.36c3.31 6.02 6.64 12.32 10.02 18.71 19.4 36.69 39.46 74.63 69.46 91.57 20 11.29 32.42 32.49 32.42 55.31 0 35.28-28.71 63.98-65.08 64zM112 200c0-30.93-25.07-56-56-56S0 169.07 0 200s25.07 56 56 56 56-25.07 56-56zm-80 0c0-13.23 10.77-24 24-24s24 10.77 24 24-10.77 24-24 24-24-10.77-24-24zm360-56c-30.93 0-56 25.07-56 56s25.07 56 56 56 56-25.07 56-56-25.07-56-56-56zm0 80c-13.23 0-24-10.77-24-24s10.77-24 24-24 24 10.77 24 24-10.77 24-24 24zm-96-80c30.93 0 56-25.07 56-56s-25.07-56-56-56-56 25.07-56 56 25.07 56 56 56zm0-80c13.23 0 24 10.77 24 24s-10.77 24-24 24-24-10.77-24-24 10.77-24 24-24zm-144 80c30.93 0 56-25.07 56-56s-25.07-56-56-56-56 25.07-56 56 25.07 56 56 56zm0-80c13.23 0 24 10.77 24 24s-10.77 24-24 24-24-10.77-24-24 10.77-24 24-24z"></path></svg>Các trường tùy chỉnh</h6>
                                         </div>
                                         <div class="row" id="custom_field">
-                                                
-                                                
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +192,7 @@
                                         <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Google Analytics</h6>
                                     </div>
                                     <div class="col col-sm-12">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -197,12 +200,12 @@
                                         <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Cấu hình gửi email</h6>
                                     </div>
                                     <div class="col col-sm-12">
-                                        
+
                                     </div>
                                 </div>
                             </div>
                             <!--Developers-->
-                            <div class="col col-12 tab-settings" id="developers" style="display: block">
+                            <div class="col col-12 tab-settings" id="developers">
                                 <div class="row">
                                     <div class="col col-sm-12">
                                         <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Tùy chỉnh kích thước nén của ảnh</h6>
@@ -215,6 +218,21 @@
                                     <div class="col col-sm-12">
                                         <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Tùy chỉnh kích thước nén của ảnh</h6>
                                     </div>
+                                    <div class="col col-sm-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Custom-->
+                            <div class="col col-12 tab-settings" id="custom">
+                                <div class="row">
+                                    @if (isset($settings_group))
+                                        @foreach ($settings_group as $item)
+                                            <div class="col col-sm-12">
+                                                <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>{{ $item->name }}</h6>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                     <div class="col col-sm-12">
 
                                     </div>
@@ -233,14 +251,14 @@
                                 <h6 class="pt40"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Tuỳ chỉnh tương tác người dùng</h6>
                             </div>
                             <div class="p15">
-                                <div class="form-group">  
+                                <div class="form-group">
                                     <span class="switch switch-sm">
                                         <input type="checkbox" class="switch" id="switch-tips-developer">
                                         <label for="switch-tips-developer">Lời khuyên dành cho nhà phát triển</label>
                                         <a href="javascript:void(0)"><svg tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="setting('key.value')" data-content="Gửi cho bạn những gợi ý code trong khi phát triển ứng dụng web" class="tips tips-dev" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"></path></svg></a>
                                     </span>
                                 </div>
-                                <div class="form-group">  
+                                <div class="form-group">
                                     <span class="switch switch-sm">
                                         <input type="checkbox" class="switch" id="switch-sm">
                                         <label for="switch-sm">Tips developer</label>
@@ -252,36 +270,30 @@
                 </div>
             </div>
         </div>
-        
+
         <!--CreateSettings-->
-        <form action="/settings/create_field" method="POST"></form>
+        <form action="{{ route('create_field.settings') }}" method="POST">
+            @csrf
             <div class="row panel clear__ create_items">
                 <div class="col col-12 text-center">
                     <h6><svg viewBox="0 0 512 512"><path fill="currentColor" d="M384 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm120 16c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-48 0c0-110.5-89.5-200-200-200S56 145.5 56 256s89.5 200 200 200 200-89.5 200-200z"></path></svg>Cài đặt mới</h6>
                 </div>
                 <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="label">Tên *</label>
-                        <input type="text" id="label" name="label" class="form-control" placeholder="label: Điện thoại">
-                    </div>
-                </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12">
-                    <div class="form-group">
                         <label for="key">Khoá *</label>
-                        <input type="text" id="key" name="key" class="form-control" placeholder="name: phone">
+                        <input type="text" id="key" name="key" class="form-control" placeholder="key: phone" required>
                     </div>
                 </div>
                 <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="value">Giá trị *</label>
-                        <input type="text" id="value" name="value" class="form-control" placeholder="value: 0123.456.789">
+                        <label for="label">Tên *</label>
+                        <input type="text" id="label" name="label" class="form-control" placeholder="label: Điện thoại" required>
                     </div>
                 </div>
                 <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label for="title_web">Loại *</label>
-                        <select name="type" id="type" class="form-control" required="required">
-                            <option value="">Chọn loại</option>
+                        <select name="type" id="type" class="form-control" required>
                             <option value="text">Hộp văn bản</option>
                             <option value="textArea">Vùng văn bản</option>
                             <option value="richTextBox">Hộp văn bản phong phú</option>
@@ -295,50 +307,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element">
+                <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="title_web">Nhóm *</label>
-                        <select name="group_by" class="form-control" id="group_by" required="required">
-                            <option value="basic">Cơ bản</option>
-                            <option value="advanced">Nâng cao</option>
-                            <option value="developer">Nhà phát triển</option>
+                        <label for="group_key">Chọn nhóm hoặc thêm mới *</label>
+                        <select name="group_name" class="form-control" id="group_name">
+                            @foreach ($settings_group as $item)
+                                <option value="{{ $item->setting_key }}">{{ $item->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element">
+                <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="element_class">Class</label>
-                        <input type="text" value="col col-lg-4 col-md-6 col-12" id="element_class" name="element_class" class="form-control" placeholder="Element class">
+                        <label for="property">Thuộc tính thẻ ('class', 'id','data-*')</label>
+                        <input type="text" id="property" name="property" class="form-control" placeholder="Thuộc tính">
                     </div>
                 </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element placeholder">
+                <div class="col col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="element_placeholder">Placeholder</label>
+                        <label for="element_placeholder">Văn bản giữ chỗ</label>
                         <input type="text" id="element_placeholder" name="element_placeholder" class="form-control" placeholder="Văn bản giữ chỗ">
-                    </div>
-                </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element">
-                    <div class="form-group">
-                        <label for="element_note">Ghi chú</label>
-                        <input type="text" id="element_note" name="element_note" class="form-control" placeholder="Chú thích trường này">
-                    </div>
-                </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element border_ none">
-                    <div class="form-group">
-                        <label for="element_radius">Độ bo cạnh</label>
-                        <input type="number" id="element_radius" name="element_radius" class="form-control" placeholder="Thiết lập độ mịn của đường cong (px)">
-                    </div>
-                </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element width none">
-                    <div class="form-group">
-                        <label for="element_width">Chiều rộng</label>
-                        <input type="number" id="element_width" name="element_width" class="form-control" placeholder="Thiết lập chiều rộng (px)">
-                    </div>
-                </div>
-                <div class="col col-lg-3 col-md-6 col-sm-12 element height none">
-                    <div class="form-group">
-                        <label for="element_height">Chiều cao</label>
-                        <input type="number" id="element_height" name="element_height" class="form-control" placeholder="Thiết lập chiều cao (px)">
                     </div>
                 </div>
                 <div class="col col-12 text-right">
@@ -350,73 +338,11 @@
 @endsection
 
 @section('footer')
+    <script src="{{ asset('public/backend/libs/select2/select2.full.min.js') }}"></script>
     <script>
-        /*Create field*/
-        $('#submit').on('click', function(){
-            $.ajax({
-                type: "POST",
-                url: "",
-                data: {
-                    label: $('#label').val(),
-                    key:   $('#key').val(),
-                    value: $('#value').val(),
-                    type:  $('#type').val(),
-                    group_by:  $('#group_by').val(),
-                    element_class:  $('#element_class').val(),
-                    element_id:  $('#element_id').val(),
-                    element_width:  $('#element_width').val(),
-                    element_height:  $('#element_height').val(),
-                    element_radius:  $('#element_radius').val(),
-                    element_placeholder:  $('#element_placeholder').val(),
-                },
-                success: function (response) {
-                    console.log('success');
-                    $('#custom_field').append(response);
-                },
-                error: function(){
-                    console.log('error')
-                }
-            });
-        });
-        /*Validate onchange*/
-        $('#type').on('change', function(){
-            if ($(this).val() == 'text') {
-                $('.element').removeClass('element');
-                $('.placeholder').removeClass('none');
-                $('.height').addClass('none');
-            }
-            if ($(this).val() == 'textArea') {
-                $('.element').removeClass('element');
-                $('.placeholder').addClass('none');
-                $('.height').removeClass('none');
-            }
-            if ($(this).val() == 'image' || $(this).val() == 'multiImage') {
-                $('.element').removeClass('element');
-                $('.placeholder').addClass('none');
-                $('.height').removeClass('none');
-                $('.border_').removeClass('none');
-                $('.width').removeClass('none');
-            } else {
-                $('.border_').addClass('none');
-                $('.width').addClass('none');
-            }
-        });
-        $('.delete_field').on('click', function(){
-            $.ajax({
-                type: "POST",
-                url: "",
-                data: {
-                    id: $(this).val()
-                },
-                success: function (response) {
-                    console.log('okie');
-                    $('.modal').removeClass('show');
-                    $('.modal-backdrop').removeClass("show");
-                },
-                error: function(response){
-                    console.log('loi roi')
-                }
-            });
+        //Slect 2 Chọn nhóm hoặc thêm mới
+        $("#group_name").select2({
+          tags: true
         });
     </script>
     <script>
@@ -435,16 +361,7 @@
         }
     </script>
     <script>
-        CKEDITOR.replace( 'editor', {
-            extraPlugins: 'easyimage',
-            extraPlugins: 'cloudservices',
-            filebrowserBrowseUrl: '/public/templates/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Images',
-            filebrowserFlashBrowseUrl: '/public/templates/ckfinder/ckfinder.html?type=Flash',
-            filebrowserUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '/uploads/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl: '/public/templates/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-        } );
+        CKEDITOR.replace( 'editor');
         $('.dropify').dropify({
             messages: {
                 'default': 'Kéo thả tập tin ở đây hoặc nhấn chuột',
